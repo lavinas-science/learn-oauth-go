@@ -1,5 +1,7 @@
 github.com/go-resty/resty/v2 v2.6.0 h1:joIR5PNLM2EFqqESUjCMGXrWmXNHEU9CEiK813oKYS4=
 github.com/go-resty/resty/v2 v2.6.0/go.mod h1:PwvJS6hvaPkjtjNg9ph+VrSD92bi5Zq73w/BIH7cC3Q=
+github.com/lavinas-science/learn-utils-go v0.0.0-20210920210638-946c3091aa08 h1:LQgh3ZfNZrL4BZvrdVQdmpbIR7s08vtVjBgw1/HqtYY=
+github.com/lavinas-science/learn-utils-go v0.0.0-20210920210638-946c3091aa08/go.mod h1:8oJwhvN2HIK2VKvqCAiUrpbjUoYEBYqF6FQnakWLjzk=
 golang.org/x/net v0.0.0-20181220203305-927f97764cc3/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4 h1:4nGaVu0QrbjT/AK2PRLuQfQuh6DJve+pELhqTdAj3x0=
 golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4/go.mod h1:p54w0d4576C0XHj96bSt6lcn1PtDYWL6XObtHCRCNQM=

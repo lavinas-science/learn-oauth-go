@@ -3,23 +3,23 @@ package oauth
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
 
 	"github.com/go-resty/resty/v2"
-	"github.com/lavinas-science/learn-oauth-go/utils/errors"
+	"github.com/lavinas-science/learn-utils-go/rest_errors"
 )
 
 const (
-	headerXPublic   = "X-Public"
-	headerXClientId = "X-Client-Id"
-	headerXCallerId = "X-Caller-Id"
+	headerXPublic    = "X-Public"
+	headerXClientId  = "X-Client-Id"
+	headerXCallerId  = "X-Caller-Id"
 	paramAccessToken = "access_token"
-	UserContentType = "application/json"
-	UserBaseURI = "http://127.0.0.1:9090"
-	UserURI = "/oauth/access_token"
-	timeoutSeconds = 1
+	UserContentType  = "application/json"
+	UserBaseURI      = "http://127.0.0.1:9090"
+	UserURI          = "/oauth/access_token"
+	timeoutSeconds   = 1
 )
 
 var (
@@ -66,7 +66,7 @@ func GetClientId(r *http.Request) int64 {
 	return c
 }
 
-func AuthenticateRequest(r *http.Request) *errors.RestErr {
+func AuthenticateRequest(r *http.Request) *rest_errors.RestErr {
 	if r == nil {
 		return nil
 	}
@@ -87,26 +87,26 @@ func AuthenticateRequest(r *http.Request) *errors.RestErr {
 func cleanRequest(request *http.Request) {
 	if request == nil {
 		return
-	}	
+	}
 	request.Header.Del(headerXClientId)
 	request.Header.Del(headerXCallerId)
 }
 
-func getAccessToken(ats string) (*accessToken, *errors.RestErr) {
-	re, err := client.R().SetHeader("Content-Type",UserContentType).Get(UserBaseURI + UserURI + "/" + ats)
+func getAccessToken(ats string) (*accessToken, *rest_errors.RestErr) {
+	re, err := client.R().SetHeader("Content-Type", UserContentType).Get(UserBaseURI + UserURI + "/" + ats)
 	if err != nil {
-		return nil, errors.NewInternalServerError("Authentication Service off")
+		return nil, rest_errors.NewInternalServerError("Authentication Service off")
 	}
-	if re.RawResponse.StatusCode > 299  {
-		var rErr errors.RestErr
+	if re.RawResponse.StatusCode > 299 {
+		var rErr rest_errors.RestErr
 		if err := json.Unmarshal(re.Body(), &rErr); err != nil {
-			return nil, errors.NewInternalServerError("Invalid rest-client error unmarshall client")
+			return nil, rest_errors.NewInternalServerError("Invalid rest-client error unmarshall client")
 		}
 		return nil, &rErr
 	}
 	var at accessToken
 	if err := json.Unmarshal(re.Body(), &at); err != nil {
-		return nil, errors.NewInternalServerError("Invalid rest-client access token unmarshall client")
+		return nil, rest_errors.NewInternalServerError("Invalid rest-client access token unmarshall client")
 	}
 	return &at, nil
 }

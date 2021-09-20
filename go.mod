@@ -6,3 +6,5 @@ require (
 	github.com/go-resty/resty/v2 v2.6.0 // direct
 	golang.org/x/net v0.0.0-20210405180319-a5a99cb37ef4 // indirect
 )
+
+require github.com/lavinas-science/learn-utils-go v0.0.0-20210920210638-946c3091aa08 // direct
