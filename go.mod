@@ -7,4 +7,4 @@ require (
 	golang.org/x/net v0.0.0-20210928044308-7d9f5e0b762b // indirect
 )
 
-require github.com/lavinas-science/learn-utils-go v0.0.0-20210928212206-f2bd593fbe3a // direct
+require github.com/lavinas-science/learn-utils-go v0.0.0-20210929175044-9a20743fedfe // direct

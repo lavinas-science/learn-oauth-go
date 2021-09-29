@@ -66,7 +66,7 @@ func GetClientId(r *http.Request) int64 {
 	return c
 }
 
-func AuthenticateRequest(r *http.Request) *rest_errors.RestErr {
+func AuthenticateRequest(r *http.Request) rest_errors.RestErr {
 	if r == nil {
 		return nil
 	}
@@ -92,7 +92,7 @@ func cleanRequest(request *http.Request) {
 	request.Header.Del(headerXCallerId)
 }
 
-func getAccessToken(ats string) (*accessToken, *rest_errors.RestErr) {
+func getAccessToken(ats string) (*accessToken, rest_errors.RestErr) {
 	re, err := client.R().SetHeader("Content-Type", UserContentType).Get(UserBaseURI + UserURI + "/" + ats)
 	if err != nil {
 		return nil, rest_errors.NewInternalServerError("Authentication Service off")
@@ -102,7 +102,7 @@ func getAccessToken(ats string) (*accessToken, *rest_errors.RestErr) {
 		if err := json.Unmarshal(re.Body(), &rErr); err != nil {
 			return nil, rest_errors.NewInternalServerError("Invalid rest-client error unmarshall client")
 		}
-		return nil, &rErr
+		return nil, rErr
 	}
 	var at accessToken
 	if err := json.Unmarshal(re.Body(), &at); err != nil {
