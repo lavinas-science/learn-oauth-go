@@ -99,7 +99,8 @@ func getAccessToken(ats string) (*accessToken, rest_errors.RestErr) {
 	}
 	if re.RawResponse.StatusCode > 299 {
 		var rErr rest_errors.RestErr
-		if err := json.Unmarshal(re.Body(), &rErr); err != nil {
+		rErr, err := rest_errors.NewRestErrorFromBytes(re.Body())
+		if err != nil {
 			return nil, rest_errors.NewInternalServerError("Invalid rest-client error unmarshall client")
 		}
 		return nil, rErr
