@@ -22,6 +22,26 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
+
+func TestConstants(t *testing.T) {
+	assert.EqualValues(t, headerXPublic, "X-Public")
+	assert.EqualValues(t, headerXClientId, "X-Client-Id")
+	assert.EqualValues(t, headerXCallerId, "X-Caller-Id")
+	assert.EqualValues(t, paramAccessToken, "access_token")
+	assert.EqualValues(t, UserContentType, "application/json")
+	assert.EqualValues(t, UserBaseURI, "http://127.0.0.1:9090")
+	assert.EqualValues(t, UserURI, "/oauth/access_token")
+	assert.EqualValues(t, timeoutSeconds, 1)
+}
+
+func TestIsPublicNil(t *testing.T) {
+	assert.True(t, IsPublic(nil))
+}
+
+func TestIsPublic(t *testing.T) {
+	assert.True(t, IsPublic(nil))
+}
+
 func TestGetAccessTokenOk(t *testing.T) {
 	httpmock.RegisterResponder("GET", UserBaseURI + UserURI + "/" + "52fdfc072182654f163f5f0f9a621d729566c74d10037c4d7bbb0407d1e2c649",
 		func(req *http.Request) (*http.Response, error) {
